@@ -1,0 +1,122 @@
+<html>
+<body>
+<form name="form" action="" method="post">
+	<h1>Registration Form</h1>
+		<table>
+			<tr>
+				<th>First Name</th>
+				<td><input type="text" id="name" value=""/></td>
+			</tr>
+			<tr>
+				<th>Email</th>
+				<td><input type="email" id="email" value=""/></td>
+			</tr>
+			<tr>
+				<th>Phone.no</th>
+				<td><input type="text" id="phone" value=""/></td>
+			</tr>
+			<tr>
+				<th>Gender</th>
+				<td><input type="radio" id="gender" value="MALE"/>MALE
+				<input type="radio" value="FEMALE"/>FEMALE</td>
+			</tr>
+			<tr id="state">
+				<th>State</th>
+				<td><select>
+					<option>Maharashtra</option>
+					<option>Rajestan</option>
+					<option>Gujarat</option>
+					<option>Uttarpradesh</option>
+					<option>Uttrakhand</option>
+					<option>Kerla</option>
+				</select></td>
+			</tr>
+			<tr id="date">
+				<th>Date of Birth: (dd/mm/yyyy)</th>
+				<td><select name="date">
+		<script language="javascript" type="text/javascript"> 
+			for(var d=1;d<=31;d++)
+			{
+				document.write("<option>"+d+"</option>");
+			}
+		</script>
+	</select>
+			<select name="month">
+		<script language="javascript" type="text/javascript"> 
+			for(i=1;i<=12;i++)
+			{
+				document.write("<option>"+i+"</option>");
+			}
+		</script>
+	</select>
+			<select name="year">
+		<script language="javascript" type="text/javascript"> 
+			for(i=1950;i<=2025;i++)
+			{
+				document.write("<option>"+i+"</option>");
+			}
+		</script></td>
+			</tr>
+			<tr>
+				<td><input type="button" name="button" id="submit" value="Add" onclick="displayDetails()"></td>
+			</tr>
+		</table>
+
+<table id="display" border="1">
+	<tr>
+		<th>Name</th>
+		<th>Email</th>
+		<th>Phone</th>
+		<th>Gender</th>
+		<th>Date of Birth</th>
+		<th>state</th>
+	</tr>
+</table>
+
+
+</form>
+</body>
+
+<script type="text/javascript">
+	var submit = document.getElementById("submit");
+	submit.addEventListener("click",displayDetails);
+
+	var row = 1;
+
+	function displayDetails(){
+		var name = document.getElementById("name").value;
+		var email = document.getElementById("email").value;
+		var phone = document.getElementById("phone").value;
+		var gender = document.getElementById("gender").value;
+		var state = document.getElementById("state").value;
+		var date = document.getElementById("date").value;
+
+		if (!name || !email || !phone || !gender || !state || !date ) {
+			alert("please fill all the blank");
+			return;
+		}
+		var display = document.getElementById("display");
+		var newRow = display.insertRow(row);
+		var cell1 = newRow.insertCell(0);
+		var cell2 = newRow.insertCell(1);
+		var cell3 = newRow.insertCell(2);
+		var cell4 = newRow.insertCell(3);
+		var cell5 = newRow.insertCell(4);
+		var cell6 = newRow.insertCell(5);
+
+		cell1.innerHTML = name;
+		cell2.innerHTML = email;
+		cell3.innerHTML = phone;
+		cell4.innerHTML = gender;
+		cell5.innerHTML = state;
+		cell6.innerHTML = date;
+
+		row++;
+		
+
+	}
+</script>
+
+
+</html>
+		

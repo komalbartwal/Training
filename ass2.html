@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style type="text/css">
+		input.ng-empty{
+    border-color: red;
+}
+	</style>
+	<meta charset="utf-8">
+	<title>Studentdata</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+</head>
+<body>
+	<div ng-app="angularapp" ng-controller="mycontroller">
+		<h1>Employ Data</h1>
+		<div class="row">
+			
+			<div class="container">
+				<form ng-submit="todoAdd()">
+					Name<input type="text" ng-model="txtname" /><br>
+					Email<input type="email" ng-model="txtemail"/><br>
+					Phone.no<input type="tel" ng-model="txtnumber"/><br>
+					State<select ng-model="txtstate">
+						<option ng-repeat='state in statename'>Select State</option>
+						<option>Maharashtra</option>
+						<option>Gujarat</option>
+						<option>Uttarakhand</option>
+						<option>Uttarpradesh</option>
+						<option>Rajastan</option>
+						<option>West Bengal</option>
+					</select>
+
+					City<select ng-model="txtcity" >
+						<option ng-repeat='city in cityname'>select state</option>
+						<option>Thane</option>
+						<option>Jaipur</option>
+						<option>Dheradun</option>
+						<option>Rishikesh</option>
+						<option>Lucknow</option>
+						<option>Surat</option>
+						<option>Kolkata</option>
+					</select>
+		DOB<input type="date" ng-model="txtdob"><br>
+		Password<input type="password" ng-model="txtpass"/><br>
+		<input type="submit" value="submit" /><br><br>
+		 
+		</form>
+	</div>
+		<button ng-click="sort1('email')"> By Email </button>
+		<button ng-click="sort1('name')" >By Name </button>
+		<br><br>
+
+		 <input type="text" id="search" name="employ" ng-model="x" placeholder="search employ" /> 
+		 <br>
+		
+		 <div>
+		<table border="1">
+			<thead>
+			<tr>
+				<th>Name</th>
+				<th>Email</th>
+				<th>Phone</th>
+				<th>DOB</th>
+				<th>State</th>
+				<th>City</th>
+				<th>Password</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat= 'x in todoList | orderBy : sorting | filter: x'>
+				<td>{{x.name}}</td>
+				<td>{{x.email}}</td>
+				<td>{{x.phone}}</td>
+				<td>{{x.dob | date:"dd/MM/yyyy"}} </td>
+				<td>{{x.state}}</td>
+				<td>{{x.city}}</td>
+				<td>{{x.password}}</td>
+			</tr>
+			</tbody>
+		</table>
+
+	</div>
+</body>
+</html>
+
+	<script>
+		var app = angular.module("angularapp", []);
+
+		app.controller("mycontroller", function($scope){
+
+			$scope.todoList = [{'name':'komal' ,'email':'k@gmail.com', 'phone': 9987387022, 'dob': '11-6-1999','state' : 'Uttarakhand','city':'Dehradun','password':1234},
+			{'name':'anjili' ,'email':'anj@gmail.com','phone': 9987387022, 'dob': '19-8-1997','state' : 'Rajasthan', 'city':'Jaipur','password':1152},
+			{'name':'mahaveer' ,'email':'veer@gmail.com','phone': 9987387022,'dob': '25-3-2008','state' : 'Maharashtra', 'city':'Thane','password':2015},
+			{'name':'jayshree' ,'email':'js@gmail.com','phone': 9987387124,'dob': '11-7-1998','state' : 'Gujarat', 'city':'Surat','password':8465},
+			{'name':'madhuri' ,'email':'m@gmail.com','phone': 9987387128, 'dob': '19-8-2000','state' : 'West Bengal', 'city':'Kolkata','password':4565},
+			{'name':'neha' ,'email':'n@gmail.com','phone': 9987387023, 'dob': '22-6-1999','state' : 'Maharashtra', 'city':'Thane','password':8561},
+			{'name':'madhu' ,'email':'mad@gmail.com','phone': 9945287022, 'dob': '19-9-1998','state' : 'Maharashtra', 'city':'Thane','password':7854},
+			{'name':'kiran' ,'email':'ki@gmail.com','phone': 9887387022, 'dob': '8-8-1999','state' : 'Gujarat', 'city':'Surat','password':7894},
+			{'name':'kajal' ,'email':'ka@gmail.com','phone': 9985687022,'dob': '1-1-2000','state' : 'Uttarpradesh', 'city':'Lucknow','password':2589},
+			{'name':'suman' ,'email':'s@gmail.com','phone': 9987384512, 'dob': '9-9-1995','state' : 'Uttarakhand', 'city':'Rishikesh','password':4213}];
+
+			$scope.todoAdd = function()
+			{
+				if($scope.txtname != "" && $scope.txtemail != "" && $scope.dob != "" && $scope.state != "" && $scope.city != "" && $scope.password != "")
+				{
+					$scope.todoList.push({name: $scope.txtname,email: $scope.txtemail,phone: $scope.txtnumber, dob: $scope.txtdob,state: $scope.txtstate,city: $scope.txtcity,password: $scope.txtpass, done: false});
+					$scope.txtname = "";
+					$scope.txtemail = "";
+					$scope.txtdob = "";
+					$scope.txtstate = "";
+					$scope.txtcity = "";
+					$scope.txtpass = "";
+
+				}
+			};
+
+			 $scope.search =function (item) {
+			 	return (item.name.indexOf($scope.searchtext) !=-1 || item.email.indexOf($scope.search) !=-1 )
+ };
+
+		
+		});
+</script>
+
